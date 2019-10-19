@@ -2,21 +2,21 @@ package com.example.cinema.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
-public class Poster {
+public class Poster extends AbstractEqualsAndHashCode{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String filePath;
+
+    @OneToOne
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    private Movie movie;
 }

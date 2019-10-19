@@ -12,13 +12,14 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
-public class Room {
+public class Room  extends AbstractEqualsAndHashCode{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private int capacity;
     private String description;
+
+
 }

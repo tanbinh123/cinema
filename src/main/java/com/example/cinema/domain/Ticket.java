@@ -13,9 +13,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
-public class Ticket {
+public class Ticket extends AbstractEqualsAndHashCode {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
