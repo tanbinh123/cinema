@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,7 +32,13 @@ public class Session extends AbstractEqualsAndHashCode{
     private List<Ticket> tickets;
 
     public List<Ticket> getTickets() {
+        if (tickets == null) tickets = new ArrayList<>();
         return tickets;
+    }
+
+    public void addTicket(Ticket ticket){
+        getTickets().add(ticket);
+        ticket.setSession(this);
     }
 
 }

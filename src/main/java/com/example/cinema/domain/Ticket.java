@@ -2,10 +2,7 @@ package com.example.cinema.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -21,4 +18,7 @@ public class Ticket extends AbstractEqualsAndHashCode {
     private String seat;
     private BigDecimal pirce;
 
+    @ManyToOne
+    @JoinColumn(name = "session_id")
+    private Session session;
 }

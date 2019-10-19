@@ -1,5 +1,6 @@
 package com.example.cinema.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,16 +13,13 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public abstract class AbstractEqualsAndHashCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
-    public AbstractEqualsAndHashCode(Long id) {
-        this.id = id;
-    }
 
     @Override
     public boolean equals(Object obj) {

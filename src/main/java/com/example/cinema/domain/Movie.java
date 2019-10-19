@@ -26,7 +26,7 @@ public class Movie extends AbstractEqualsAndHashCode{
     private List<Marathon> marathons;
 
     public List<Marathon> getMarathons() {
-        if (marathons == null)marathons = new ArrayList<>();
+        if (marathons == null) marathons = new ArrayList<>();
         return marathons;
     }
 }
