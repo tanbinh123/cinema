@@ -12,7 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public abstract class AbstractEqualsAndHashCode {
 
-
     private Long id;
 
     @Override
