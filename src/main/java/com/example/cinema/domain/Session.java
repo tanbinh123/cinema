@@ -31,6 +31,11 @@ public class Session extends AbstractEqualsAndHashCode{
     @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets;
 
+    public Session(Long id, LocalDateTime startTime) {
+        super(id);
+        this.startTime = startTime;
+    }
+
     public List<Ticket> getTickets() {
         if (tickets == null) tickets = new ArrayList<>();
         return tickets;
