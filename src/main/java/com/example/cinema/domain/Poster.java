@@ -19,4 +19,9 @@ public class Poster extends AbstractEqualsAndHashCode{
     @OneToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movie movie;
+
+    public Poster(Long id, String filePath) {
+        super(id);
+        this.filePath = filePath;
+    }
 }

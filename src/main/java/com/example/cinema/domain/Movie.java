@@ -8,7 +8,6 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -24,6 +23,15 @@ public class Movie extends AbstractEqualsAndHashCode{
     private Integer requiredAge;
     @ManyToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Marathon> marathons;
+
+    public Movie(Long id, String title, EMovieCategory category, Integer length, String description, Integer requiredAge) {
+        super(id);
+        this.title = title;
+        this.category = category;
+        this.length = length;
+        this.description = description;
+        this.requiredAge = requiredAge;
+    }
 
     public List<Marathon> getMarathons() {
         if (marathons == null) marathons = new ArrayList<>();
