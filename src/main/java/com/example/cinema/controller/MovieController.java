@@ -1,6 +1,7 @@
 package com.example.cinema.controller;
 
 import com.example.cinema.domain.Movie;
+import com.example.cinema.domain.Poster;
 import com.example.cinema.service.MovieService;
 import lombok.AllArgsConstructor;
 
@@ -32,6 +33,18 @@ public class MovieController {
         Long id = movieService.createMovie(movie.getTitle(), movie.getCategory(), movie.getLength(), movie.getDescription(), movie.getRequiredAge(),null );
         movie.setId(id);
         return movie;
+    }
+
+//    @PostMapping("/add1")
+//    public Movie addMovie1(@RequestBody Movie movie, @RequestBody String poster){
+//        Long id = movieService.createMovie(movie.getTitle(), movie.getCategory(), movie.getLength(), movie.getDescription(), movie.getRequiredAge(),poster );
+//        movie.setId(id);
+//        return movie;
+//    }
+
+    @GetMapping("/{id}")
+    public Movie getMovieById(@PathVariable("id") Long id){
+       return movieService.getMovie(id).get();
     }
 
 
