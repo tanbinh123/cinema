@@ -22,12 +22,20 @@ public class Marathon extends AbstractEqualsAndHashCode {
     private String name;
     private LocalDateTime startTime;
 
+    public Marathon(Long id, String name, LocalDateTime startTime) {
+        super(id);
+        this.name = name;
+        this.startTime = startTime;
+    }
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "marathon_movie",
             joinColumns = @JoinColumn(name = "marathon_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
+
+
     private List<Movie> movies;
 
     public List<Movie> getMovies() {
