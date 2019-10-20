@@ -1,9 +1,6 @@
 package com.example.cinema;
 
-import com.example.cinema.domain.EMovieCategory;
-import com.example.cinema.domain.Movie;
-import com.example.cinema.domain.Session;
-import com.example.cinema.domain.Ticket;
+import com.example.cinema.domain.*;
 import com.example.cinema.service.MarathonService;
 import com.example.cinema.service.MovieService;
 import com.example.cinema.service.SessionService;
@@ -20,6 +17,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -43,6 +41,7 @@ public class CinemaRunner implements CommandLineRunner {
         movieServiceInvocations();
         sessionServiceInvocations();
         ticketServiceInvocations();
+        marathonServiceInvocations();
     }
 
     private void movieServiceInvocations(){
@@ -107,6 +106,21 @@ public class CinemaRunner implements CommandLineRunner {
         LOG.info("13. Tickets on session 15 after update. amount of tickets: {}", ticketsOnSessionWithId15AfterUpdates.size());
         ticketsOnSessionWithId15AfterUpdates.forEach(ticket -> LOG.info("  {}", ticket));
 
+    }
+
+    private void marathonServiceInvocations(){
+
+        Long newMarathonId = marathonService.createMarathon("Maraton horrorów", LocalDateTime.of(2018,10,30, 20,0), Arrays.asList(6L, 8L, 9L));
+        Marathon newMarathon = marathonService.getMarathon(newMarathonId).get();
+        LOG.info("14. New marathon: {}", newMarathon);
+        newMarathon.getMovies().forEach(movie -> LOG.info("  {}", movie));
+
+
+        List<Marathon> marathons = marathonService.getAllMarathons();
+        LOG.info("15. Marathons, amount of marathons: {}", marathons.size());
+        marathons.forEach(marathon -> LOG.info("  {}", marathon));
+
+        marathonService.removeMarathon(newMarathonId);
     }
 
 
