@@ -16,7 +16,7 @@ INSERT INTO poster (id,movie_id,file_path) VALUES (13, 9, '/images/posterImposto
 INSERT INTO poster (id,movie_id,file_path) VALUES (14, 10, '/images/posterPrzemytnik.png');
 
 INSERT INTO session (id, movie_id,room_id,start_time) VALUES (15,8,2,TIMESTAMP '2019-10-21 12:00:00');
-INSERT INTO session (id, movie_id,room_id,start_time) VALUES (16,8,1,TIMESTAMP '2019-10-21 15:00:00');
+INSERT INTO session (id, movie_id,room_id,start_time) VALUES (16,8,1,TIMESTAMP '2019-05-02 15:00:00');
 INSERT INTO session (id, movie_id,room_id,start_time) VALUES (17,10,3,TIMESTAMP '2019-10-21 18:00:00');
 
 INSERT INTO ticket (id, session_id, seat, price) VALUES (18,15,'r10m2',21.00);

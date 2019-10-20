@@ -16,15 +16,15 @@ public class Ticket extends AbstractEqualsAndHashCode {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String seat;
-    private BigDecimal pirce;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "session_id")
     private Session session;
 
-    public Ticket(Long id, String seat, BigDecimal pirce) {
+    public Ticket(Long id, String seat, BigDecimal price) {
         super(id);
         this.seat = seat;
-        this.pirce = pirce;
+        this.price = price;
     }
 }

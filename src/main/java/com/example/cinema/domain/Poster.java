@@ -18,6 +18,7 @@ public class Poster extends AbstractEqualsAndHashCode{
 
     @OneToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    @ToString.Exclude
     private Movie movie;
 
     public Poster(Long id, String filePath) {

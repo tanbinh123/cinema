@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Session extends AbstractEqualsAndHashCode{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,7 +27,7 @@ public class Session extends AbstractEqualsAndHashCode{
     @JoinColumn(name = "room_id")
     private Room room;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Ticket> tickets;
 
     public Session(Long id, LocalDateTime startTime) {
@@ -46,4 +45,11 @@ public class Session extends AbstractEqualsAndHashCode{
         ticket.setSession(this);
     }
 
+    @Override
+    public String toString() {
+        return "Session{" +
+                "id=" + id +
+                ", startTime=" + startTime +
+                '}';
+    }
 }

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface SessionRepository extends JpaRepository<Session, Long> {
 
-    @Query(value = "select s from Session s where function('DATE_TRUNG', 'day', s.startTime)=?1")
+    @Query(value = "select s from Session s where function('DATE_TRUNC', 'day', s.startTime)=?1")
     List<Session> findAllByStartDate(Date date);
 
     @EntityGraph(value = "Session.tickets", type = EntityGraph.EntityGraphType.LOAD)

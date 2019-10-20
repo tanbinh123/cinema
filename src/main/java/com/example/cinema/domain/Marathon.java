@@ -28,14 +28,13 @@ public class Marathon extends AbstractEqualsAndHashCode {
         this.startTime = startTime;
     }
 
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "marathon_movie",
             joinColumns = @JoinColumn(name = "marathon_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-
-
     private List<Movie> movies;
 
     public List<Movie> getMovies() {
