@@ -21,6 +21,7 @@ public class Movie extends AbstractEqualsAndHashCode{
     private Integer length;
     private String description;
     private Integer requiredAge;
+    @Getter(value = AccessLevel.NONE)
     @ManyToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Marathon> marathons;
 
