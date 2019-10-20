@@ -3,6 +3,7 @@ package com.example.cinema;
 import com.example.cinema.domain.EMovieCategory;
 import com.example.cinema.domain.Movie;
 import com.example.cinema.domain.Session;
+import com.example.cinema.domain.Ticket;
 import com.example.cinema.service.MarathonService;
 import com.example.cinema.service.MovieService;
 import com.example.cinema.service.SessionService;
@@ -16,7 +17,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -39,6 +42,7 @@ public class CinemaRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         movieServiceInvocations();
         sessionServiceInvocations();
+        ticketServiceInvocations();
     }
 
     private void movieServiceInvocations(){
@@ -81,6 +85,28 @@ public class CinemaRunner implements CommandLineRunner {
         LOG.info("9. Session wit id 5 witch tickets: {}, movie title: {}, room: {}", sessionWithId5WithTickets, sessionWithId5WithTickets.getMovie().getTitle(),
                 sessionWithId5WithTickets.getRoom().getName());
         sessionWithId5WithTickets.getTickets().forEach(ticket -> LOG.info("  {}", ticket));
+
+        Long newSessionId = sessionService.createSession(11L, 4L, LocalDateTime.of(2019,4, 12,10,30));
+        Session newSession = sessionService.getSession(newSessionId).get();
+        LOG.info("10. New session: {}", newSession);
+
+        sessionService.removeSession(16L);
+    }
+
+    private void ticketServiceInvocations(){
+        List<Ticket> ticketsOnSessionWithId15 = ticketService.getAllTicketsForSession(15L);
+        LOG.info("11. Tickets on session 15, ammount of tickets: {}", ticketsOnSessionWithId15.size());
+        ticketsOnSessionWithId15.forEach(ticket -> LOG.info("  {}", ticket));
+
+        Long newTicketId = ticketService.newTicket(15L, "r2m5", new BigDecimal("22.50"));
+        LOG.info("12. New ticket id: {}", newTicketId);
+
+        ticketService.cancelTicket(18L);
+
+        List<Ticket> ticketsOnSessionWithId15AfterUpdates = ticketService.getAllTicketsForSession(15L);
+        LOG.info("13. Tickets on session 15 after update. amount of tickets: {}", ticketsOnSessionWithId15AfterUpdates.size());
+        ticketsOnSessionWithId15AfterUpdates.forEach(ticket -> LOG.info("  {}", ticket));
+
     }
 
 
