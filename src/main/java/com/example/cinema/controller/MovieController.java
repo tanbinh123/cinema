@@ -1,13 +1,20 @@
 package com.example.cinema.controller;
 
+import com.example.cinema.domain.EMovieCategory;
 import com.example.cinema.domain.Movie;
 import com.example.cinema.domain.Poster;
 import com.example.cinema.service.MovieService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonNode;
+import javafx.geometry.Pos;
 import lombok.AllArgsConstructor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Stream;
@@ -18,6 +25,8 @@ import java.util.stream.Stream;
 public class MovieController {
 
     private MovieService movieService;
+
+    private final static Logger LOG = LoggerFactory.getLogger(MovieController.class);
 
     @GetMapping("")
     public Stream<Movie> getAllMovies(){
@@ -35,12 +44,19 @@ public class MovieController {
         return movie;
     }
 
-//    @PostMapping("/add1")
-//    public Movie addMovie1(@RequestBody Movie movie, @RequestBody String poster){
-//        Long id = movieService.createMovie(movie.getTitle(), movie.getCategory(), movie.getLength(), movie.getDescription(), movie.getRequiredAge(),poster );
-//        movie.setId(id);
-//        return movie;
-//    }
+
+
+    @PostMapping("/add1")
+    public Movie addMovie1(@RequestBody JsonNode jsonNode){
+        Long idMovie = movieService.createMovie(jsonNode.get("title").asText(),
+                EMovieCategory.valueOf(jsonNode.get("category").asText()),
+                jsonNode.get("length").asInt(),
+                jsonNode.get("description").asText(), jsonNode.get("requiredAge").asInt(),
+                jsonNode.get("filePath").asText());
+        Movie movie = movieService.getMovie(idMovie).get();
+
+        return movie;
+    }
 
     @GetMapping("/{id}")
     public Movie getMovieById(@PathVariable("id") Long id){
