@@ -69,7 +69,7 @@ public class CinemaRunner implements CommandLineRunner {
         Movie movie = movieService.getMovie(newMovieId).get();
         LOG.info("6. New movie: {}", movie);
 
-        movieService.removeMovie(7L);
+        //movieService.removeMovie(7L);
     }
 
     private void sessionServiceInvocations(){

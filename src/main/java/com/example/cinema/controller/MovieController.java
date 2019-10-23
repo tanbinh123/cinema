@@ -7,11 +7,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import lombok.AllArgsConstructor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Stream;
@@ -22,6 +21,7 @@ import java.util.stream.Stream;
 public class MovieController {
 
     private MovieService movieService;
+
 
     @GetMapping("")
     public Stream<Movie> getAllMovies(){
@@ -58,6 +58,10 @@ public class MovieController {
        return movieService.getMovie(id).get();
     }
 
+    @DeleteMapping("/del/{id}")
+    public void removeMovie(@PathVariable("id") Long movieId){
 
+        movieService.removeMovie(movieId);
+    }
 
 }
