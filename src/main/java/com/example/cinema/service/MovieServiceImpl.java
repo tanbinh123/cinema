@@ -10,10 +10,12 @@ import javafx.geometry.Pos;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.cdi.Eager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.persistence.FetchType;
 import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
@@ -92,9 +94,15 @@ public class MovieServiceImpl implements MovieService {
         createPoster(movie, posterFilePath);
     }
     }
-
+    //TODO: ustalic na zajeciach, czy jest to najbardziej optymalne rozwiązanie dla powiązania One to One
+    //https://www.baeldung.com/spring-dataIntegrityviolationexception
     @Override
+    @Transactional
     public void removeMovie(Long movieId) {
+        Movie movie = movieRepository.findById(movieId).get();
+        Poster poster = posterRepository.findByMovie(movie).get();
         movieRepository.deleteById(movieId);
+        posterRepository.delete(poster);
+
     }
 }
